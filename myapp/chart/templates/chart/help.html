@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Guidlines</h2>
+<ul>
+<li>To create a channel or a chat room</li>
+<li>Click on create channel link on <a href="{% url 'chart:index' %}">Home</a> or on side bar</li>
+<li>Enter the channel name and select a category of your chat and press create</li>
+<li>Your channel will appear in the <a href="{% url 'chart:index' %}">Home</a></li>
+<li>If the category of your chat is empty before you create, it will appear on the top</li>
+<li>You can click on  any these category to view all channel in that category</li>
+<li>Enter any keyword of channel tittle to search channel</li>
+<li>you can only chat/send message in each channel</li>
+</ul>
+
+{% endblock %}

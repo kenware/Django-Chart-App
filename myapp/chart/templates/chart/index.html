@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container-fluid">
+   <div class="row">
+      <div class="col-sm-2">
+	  Categories:
+      </div>
+      <div class="col-sm-10 ">
+	  {% for chanel in channel %}
+	    {% if chanel.id in cat %}
+          <a href="{% url 'chart:category' chanel.id %}">{{ chanel.category }}</a>|
+		{% endif %}
+       {% endfor %}
+      </div>
+   </div>
+</div>
+<h1>My Chat Application</h1>
+<form action="{% url 'chart:index' %}" method="post">
+   {% csrf_token %}
+     {{ form2 }} 
+     <input type="submit" name="search_data" value="search" />
+     <h3><a href="{% url 'chart:index' %}"><font color="red">{{ clear_search }}</font></a></h3>
+</form>
+
+<div class="butt"><h2> <a href="#">Create New Channel/Chatroom</a></h2></div>
+
+<div class="channel" style="">
+  <form action="{% url 'chart:index' %}" method="post">
+    {% csrf_token %}
+    <table>
+       {{ form.as_table }}
+    </table>
+    <input type="submit" value="Create channel" name="create_channel"/><br><br>
+    <input type="button" value="Cancel channel" class="cancel" />
+   </form>
+</div>
+<h2>{{ channel.count}} Channels/Chat Room</h2>
+ {% if channel %}
+   {% for chanel in channel %}
+   <ul>
+     <li>
+     <h3><a href="{% url 'chart:room' chanel.id %}#chat">{{ chanel.channel_text }}</a></h3>
+	 <h4>Created : {{ chanel.date_created }}</h4>
+     You can only <a href="{% url 'chart:room' chanel.id %}#chat">View/Chat</a> in the chat room
+     </li>
+   </ul>
+   {% endfor%}
+    <br><br><br><br> <br><br><br><br>
+ {% endif %}
+{% endblock %}
